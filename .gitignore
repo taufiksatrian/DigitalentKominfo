@@ -1,9 +1,10 @@
 *
-README.md
-!Hands On
-!Modul1/Praktikum1.ipynb
+!.gitignore
+!README.md
+!HandsOn/
+!Modul1/
 !Modul2/analisis_data_timeseries.ipynb
 !Modul2/TMA Depok 2023.xlsx
 !Modul3/Customer_Segmentation.ipynb
 !Modul3/customer_segmentation.csv
-!Modul4/microbes.csv
+!Modul4/
