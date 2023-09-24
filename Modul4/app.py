@@ -1,7 +1,6 @@
 import joblib
 import numpy as np
 import pandas as pd
-import seaborn as sns
 import streamlit as st
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import accuracy_score

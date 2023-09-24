@@ -1,4 +1,5 @@
 *
+Modul4/microbes.csv
 !.gitignore
 !README.md
 !HandsOn/
@@ -8,7 +9,7 @@
 !Modul3/Customer_Segmentation.ipynb
 !Modul3/customer_segmentation.csv
 !Modul4/
-!Modul4/Requirement.txt
+!Modul4/requirement.txt
 !Modul4/Praktikum4.ipynb
 !Modul4/app.py
 !Modul4/telco_churn_sample.csv
