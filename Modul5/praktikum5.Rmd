@@ -1,18 +1,324 @@
 ---
-title: "R Notebook"
-output: html_notebook
+title: "Praktikum 5"
+output:
+  html_document:
+    df_print: paged
+  html_notebook: default
+  pdf_document: default
 ---
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
-
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
 
 ```{r}
-plot(cars)
+dt.arima <- read.csv("marina_complete.csv",header=T,sep=",")
+str(dt.arima)
 ```
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+```{r}
+tma <- ts(dt.arima$y)
+tma
+```
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+```{r}
+ts.plot(tma, type="l", ylab="Tinggi Muka Air")
+```
 
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+Partisi Data Data Bagi Hasil akan dibagi menjadi dua bagian yaitu data training (80%) dan data testing (20%). Data training digunakan untuk membangun model, sedangkan data testing digunakan untuk validasi model.
+
+```{r}
+dataTrain <- window(tma, start = 1, end = 16916)
+head(dataTrain)
+```
+
+```{r}
+dataTest <- window(tma, start = 16916, end = 21145)
+head(dataTest)
+```
+  
+### Step 1 Periksa Kestastioneran
+
+```{r}
+#install.packages("fpp")
+library(fpp)
+```
+
+```{r}
+#Plot TS
+plot(dataTrain, main = "Plot Tinggi Muka Air", ylab = "Tinggi Muka Air")
+```
+
+```{r}
+#Melalui Plot ACF
+acf(dataTrain, main = "Plot ACF Tinggi Muka Air")
+```
+
+```{r}
+#Melalui Plot ACF
+pacf(dataTrain, main = "Plot ACF Tinggi Muka Air")
+```
+
+```{r}
+#Melaui Uji Augmented Dickey-Fuller (ADF)
+adf.test(tma, alternative = "stationary")
+```
+
+Hipotesis:
+
+H0
+: Data tidak stasioner
+
+H1
+: Data stasioner
+
+Jika p−value<α
+ maka data stastioner.
+
+Dapat dilihat bahwa p-value = 0.01 <α=0.05
+ maka data Bagi Hasil merupakan data yang stasioner.
+ 
+
+### Step 2 Identifikasi Model
+
+```{r}
+#Identifikasi model melalui Plot ACF dan PACF
+par(mfrow = c(1,2))
+acf(dataTrain, main = "Plot ACF Tinggi Muka Air", lag.max=20)
+pacf(dataTrain, main = "Plot PACF Tinggi Muka Air", lag.max=20)
+```
+
+Berdasarkan plot, dapat dilihat bahwa ACF menurun eksponensial. Sedangkan PACF signifikan pada lag ke-1 dan cut off pada lag ke-2.
+
+
+### Step 3 Pendugaan Parameter
+
+```{r}
+#Fit Model
+fit.ar1 <- Arima(dataTrain, order = c(1,0,0))
+summary(fit.ar1)
+```
+
+```{r}
+fit.ar1$coef
+```
+
+```{r}
+#t hitung untuk ar1
+thit.ar1 <- fit.ar1$coef[1]/0.0029
+thit.ar1
+```
+
+```{r}
+p.value.ar1 = 2*pt(-abs(thit.ar1), df = length(dataTrain)-1)
+p.value.ar1
+```
+
+```{r}
+#t hitung untuk intersep
+thit.int <- fit.ar1$coef[2]/0.979
+thit.int
+```
+
+```{r}
+p.value.int = 2*pt(-abs(thit.int), df = length(dataTrain)-1)
+p.value.int
+```
+
+```{r}
+auto.arima(dataTrain, trace = TRUE)
+```
+
+```{r}
+lmtest::coeftest(fit.ar1)
+```
+
+
+### Step 4 Diagnostik Model
+
+Diagnostik model dilakukan untuk mengetahui apakah sisaan dari model yang dibangun telah memenuhi asumsi pemodelan. Asumsi sisaan yang harus terpenuhi pada model ARIMA(p,d,q) adalah sebagai berikut:
+
+Sisaan saling bebas (tidak ada autokorelasi) dan identik
+
+Sisaan mengikuti sebaran Normal (0,σ2)
+
+#### Eksploratif
+
+```{r}
+#Plot Histogram sisaan
+sisaan.model <- fit.ar1$residuals
+
+#Eksplorasi
+h <- hist(sisaan.model, col="lightblue", xlab="Sisaan", main="Histogram Sisaan")
+xfit <- seq(min(sisaan.model), max(sisaan.model), length=100)
+yfit <- dnorm(xfit,mean=mean(sisaan.model), sd=sd(sisaan.model))
+yfit <- yfit*diff(h$mids[1:2]*length(sisaan.model))
+lines(xfit, yfit, col="red", lwd=2)
+```
+
+```{r}
+par(mfrow=c(1,2))
+#Plot Q-Q
+qqnorm(sisaan.model, ylab="Plot QQ Sisaan Model")
+qqline(sisaan.model, col="red", lwd=2)
+
+#Plot sebaran sisaan
+plot(sisaan.model, type="p", main="Plot Sisaan")
+```
+
+```{r}
+#Plot ACF dan PACF sisaan Model
+par(mfrow=c(1,2))
+acf(sisaan.model, main = "Plot ACF sisaan", lag.max=20)
+pacf(sisaan.model, main = "Plot PACF sisaan", lag.max=20)
+```
+
+```{r}
+checkresiduals(fit.ar1)
+```
+
+Berdasarkan plot di atas dapat dilihat pada Normal Q-Q Plot menunjukkan bahwa sisaan mengikuti sebaran normal karena banyak titik-titik yang berada di sekitar garis. Jika dilihat dari plot ACF bahwa ada lag yang signifikan pada lag ke-1. Hal ini menunjukkan bahwa ada gejala autokorelasi pada sisaan. Selanjutnya, untuk memastikan kembali akan dilakukan uji asumsi secara formal.
+
+Uji Non-Autokorelasi dengan Ljung-Box test
+
+Hipotesis:
+
+H0
+: Sisaan saling bebas
+
+H1
+: Sisaan tidak saling bebas
+
+Keputusan: Tolak H0
+ jika p−value<α
+ 
+```{r}
+#L-Jung Box test
+test <- Box.test(sisaan.model, lag = 24, type = "Ljung")
+test
+```
+ 
+Berdasarkan hasil uji Ljung-Box di atas dapat dilihat bahwa Berhasil tolak H0 karena diperoleh p-value = 2.2e-16 yang berarti terdapat gejala autokorelasi pada sisaan dari model ARIMA (1,0,0) atau antar et berkorelasi.
+
+
+```{r}
+library(tseries)
+jarque.bera.test(residuals(fit.ar1))
+```
+
+Berdasarkan hasil uji normalitas di atas dapat disimpulkan bahwa H0 berhasil ditolak sehingga sisaan dari model ARIMA (1,0,0) tidak mengikuti sebaran Normal.
+
+
+### Step 5 Overfitting
+
+#### Pendugaan Parameter: Model AR(2)
+
+```{r}
+fit.ar2 <- Arima(dataTrain, order = c(2,0,0))
+summary(fit.ar2)
+```
+
+```{r}
+fit.ar2$coef[1:3]
+```
+
+```{r}
+#t hitung untuk koef ar1
+thit.ar1 <- fit.ar2$coef[1]/0.0074
+thit.ar1
+```
+
+```{r}
+p.value.ar1 = 2*pt(-abs(thit.ar1), df=length(dataTrain)-1)
+p.value.ar1
+```
+
+```{r}
+#t hitung untuk koef ar1
+thit.ar2 <- fit.ar2$coef[2]/0.0074
+thit.ar2
+
+```
+
+```{r}
+p.value.ar2 = 2*pt(-abs(thit.ar2), df=length(dataTrain)-1)
+p.value.ar2
+```
+
+```{r}
+#t hitung untuk intersep
+thit.int <- fit.ar2$coef[3]/0.7419
+thit.int
+```
+
+```{r}
+p.value.int <- 2*pt(-abs(thit.int), df=length(dataTrain)-1)
+p.value.int
+```
+
+```{r}
+#Fit Model
+fit.ar1 <- Arima(dataTrain, order = c(1,0,0))
+summary(fit.ar1)
+```
+
+```{r}
+lmtest::coeftest(fit.ar1)
+```
+
+```{r}
+#Overfitting
+fit.ar2 <- Arima(dataTrain, order = c(2,0,0))
+summary(fit.ar2)
+```
+
+```{r}
+lmtest::coeftest(fit.ar2)
+```
+Berdasarkan hasil pendugaan parameter dan overfitting, diperoleh model AR(1) sebagai model terbaik karena AR(1) memiliki nilai AIC terkecil dan jika dilihat dari hasil uji signifikansi pendugaan parameter dengan fungsi coeftest terlihat bahwa seluruh penduga paramater pada model AR(1) telah signifikan terhadap model.
+
+
+Validasi Model
+```{r}
+#plot dugaan dengan data asli
+dugaan.ar1 <- fitted(fit.ar1)
+dugaan.ar2 <- fitted(fit.ar2)
+cbind(dataTrain,dugaan.ar1,dugaan.ar2)
+```
+
+```{r}
+ts.plot(dataTrain,xlab="periode waktu",ylab="Bagi hasil",  col="blue",lty=3)
+points(dataTrain)
+lines (dugaan.ar1,col="red",lwd=2)
+lines (dugaan.ar2,col="black",lwd= 2)
+legend("topleft",legend=c("Data aktual","AR(1)","AR(2)"),
+       lty=1:3,col=c ("blue","red","black"), cex=0.7)
+```
+
+```{r}
+forecast.ar1 <- forecast(dataTrain, model = fit.ar1, h=6)
+forecast.ar1
+```
+
+```{r}
+plot(forecast.ar1)
+```
+
+
+```{r}
+accuracy(forecast.ar1, dataTest)
+```
+
+### Step 6 Peramalan
+
+```{r}
+#Forecast
+fit.ar1 <- arima(tma, order=c(1,0,0))
+forecast.tma <- forecast(tma, model = fit.ar1, h=6)
+forecast.tma
+```
+
+```{r}
+plot(forecast.tma)
+```
+
+
+
+
