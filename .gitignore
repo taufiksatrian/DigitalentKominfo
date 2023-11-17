@@ -1,3 +1,8 @@
+!HandsOn/
+!HandsOn/Sistem_Informasi_Peringatan_Dini_Banjir/pages/
+!HandsOn/Sistem_Informasi_Peringatan_Dini_Banjir/home.py
+!HandsOn/Sistem_Informasi_Peringatan_Dini_Banjir/utils.py
+!HandsOn/Sistem_Informasi_Peringatan_Dini_Banjir/model64.h5
 *
 !Modul4/microbes.csv
 !.gitignore
@@ -19,8 +24,4 @@
 !Modul5/praktikum5.Rmd
 !Modul5/README.md
 !Modul5/marina_complete.csv
-!HandsOn/
-!HandsOn/Sistem_Informasi_Peringatan_Dini_Banjir/pages/
-!HandsOn/Sistem_Informasi_Peringatan_Dini_Banjir/home.py
-!HandsOn/Sistem_Informasi_Peringatan_Dini_Banjir/utils.py
-!HandsOn/Sistem_Informasi_Peringatan_Dini_Banjir/model64.h5
+
