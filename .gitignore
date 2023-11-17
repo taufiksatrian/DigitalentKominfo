@@ -2,11 +2,6 @@
 Modul4/microbes.csv
 !.gitignore
 !README.md
-!HandsOn/
-!HandsOn/Sistem Informasi Peringatan Dini Banjir/pages
-!HandsOn/Sistem Informasi Peringatan Dini Banjir/home.py
-!HandsOn/Sistem Informasi Peringatan Dini Banjir/utils.py
-!HandsOn/Sistem Informasi Peringatan Dini Banjir/model64.h5
 !Modul1/
 !Modul2/analisis_data_timeseries.ipynb
 !Modul2/TMA Depok 2023.xlsx
@@ -24,3 +19,8 @@ Modul4/microbes.csv
 !Modul5/praktikum5.Rmd
 !Modul5/README.md
 !Modul5/marina_complete.csv
+!HandsOn
+!HandsOn/Sistem Informasi Peringatan Dini Banjir/pages
+!HandsOn/Sistem Informasi Peringatan Dini Banjir/home.py
+!HandsOn/Sistem Informasi Peringatan Dini Banjir/utils.py
+!HandsOn/Sistem Informasi Peringatan Dini Banjir/model64.h5
