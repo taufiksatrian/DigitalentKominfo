@@ -12,6 +12,19 @@ Pada Halaman ini web service dapat melakukan scrapping data yang bersumber dari 
 
 
 ## Halaman EDA (Eksplorasi dan Pemrosesan Data)
+![Alt text](images/image2.png)
+![Alt text](images/image2-1.png)
+![Alt text](images/image2-2.png)
+![Alt text](images/image2-3.png)
+![Alt text](images/image2-4.png)
+![Alt text](images/image2-5.png)
+![Alt text](images/image2-6.png)
+![Alt text](images/image2-7.png)
+![Alt text](images/image2-8.png)
+![Alt text](images/image2-9.png)
+![Alt text](images/image2-10.png)
+![Alt text](images/image2-11.png)
+![Alt text](images/image2-12.png)
 
 
 ## Halaman Model (Pemodelan LSTM)
