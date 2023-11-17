@@ -28,3 +28,13 @@ Pada Halaman ini web service dapat melakukan scrapping data yang bersumber dari 
 
 
 ## Halaman Model (Pemodelan LSTM)
+![Alt text](images/image3.png)
+![Alt text](images/image3-1.png)
+![Alt text](images/image3-2.png)
+![Alt text](images/image3-3.png)
+![Alt text](images/image3-4.png)
+![Alt text](images/image3-5.png)
+
+
+## Halaman Dashboard
+![Alt text](images/image4.png)
