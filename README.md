@@ -28,8 +28,8 @@ Saatnya memulai perjalanan menuju pemahaman mendalam tentang data science dan ma
   <img src="https://github.com/taufiksatrian/DigitalentKominfo/assets/72427297/c67b2da3-9437-4550-a046-bf3c8b03de97" alt="Data time series" style="width: 500px">
 </a>
 
-#### [Praktikum Customer Segmentation](): Analisis Customer Segmentation.
-<a href="https://github.com/taufiksatrian/DigitalentKominfo/assets/72427297/231ce3a6-72c8-425b-8851-47cfd892aef5" title="Customer Segmentation" target="_blank">
+#### [Praktikum Customer Segmentation](https://github.com/taufiksatrian/DigitalentKominfo/blob/main/Modul4/Praktikum4.ipynb): Analisis Customer Segmentation.
+<a href="https://github.com/taufiksatrian/DigitalentKominfo/blob/main/Modul4/Praktikum4.ipynb" title="Customer Segmentation" target="_blank">
   <img src="https://github.com/taufiksatrian/DigitalentKominfo/assets/72427297/231ce3a6-72c8-425b-8851-47cfd892aef5" alt="Customer Segmentation" style="width: 500px">
 </a>
 
