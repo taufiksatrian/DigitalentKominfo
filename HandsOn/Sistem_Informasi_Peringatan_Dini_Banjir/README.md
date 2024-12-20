@@ -1,7 +1,7 @@
 # Sistem Informasi Peringatan Dini Banjir Jakarta
 
-## [Presentasi](https://github.com/taufiksatrian/DigitalentKominfo/HandsOn/Sistem_Informasi_Peringatan_Dini_Banjir/Presentasi%20Sistem%20Informasi%20Peringatan%20Dini%20Banjir%20Jakarta.pdf): Presentasi.
-<a href="https://github.com/taufiksatrian/DigitalentKominfo/HandsOn/Sistem_Informasi_Peringatan_Dini_Banjir/Presentasi%20Sistem%20Informasi%20Peringatan%20Dini%20Banjir%20Jakarta.pdf" title="Presentasi" target="_blank">
+## [Presentasi](https://github.com/taufiksatrian/DigitalentKominfo/blob/main/HandsOn/Sistem_Informasi_Peringatan_Dini_Banjir/Presentasi%20Sistem%20Informasi%20Peringatan%20Dini%20Banjir%20Jakarta.pdf): Presentasi.
+<a href="https://github.com/taufiksatrian/DigitalentKominfo/blob/main/HandsOn/Sistem_Informasi_Peringatan_Dini_Banjir/Presentasi%20Sistem%20Informasi%20Peringatan%20Dini%20Banjir%20Jakarta.pdf" title="Presentasi" target="_blank">
   <img src="https://github.com/taufiksatrian/BangkitAcademy/assets/72427297/04bec8cf-9b74-473f-b405-545a8b85ef8f" alt="Presentasi" style="width: 500px">
 </a>
 
