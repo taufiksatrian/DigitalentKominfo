@@ -1,5 +1,10 @@
 # Sistem Informasi Peringatan Dini Banjir Jakarta
 
+## [Presentasi](https://github.com/taufiksatrian/DigitalentKominfo/HandsOn/Sistem_Informasi_Peringatan_Dini_Banjir/Presentasi%20Sistem%20Informasi%20Peringatan%20Dini%20Banjir%20Jakarta.pdf): Presentasi.
+<a href="https://github.com/taufiksatrian/DigitalentKominfo/HandsOn/Sistem_Informasi_Peringatan_Dini_Banjir/Presentasi%20Sistem%20Informasi%20Peringatan%20Dini%20Banjir%20Jakarta.pdf" title="Presentasi" target="_blank">
+  <img src="https://github.com/taufiksatrian/BangkitAcademy/assets/72427297/04bec8cf-9b74-473f-b405-545a8b85ef8f" alt="Presentasi" style="width: 500px">
+</a>
+
 ## Halaman API (Pengumpulan Data)
 Pada Halaman ini web service dapat melakukan scrapping data yang bersumber dari website https://pantaubanjir.jakarta.go.id/. Proses pengumpulan data sudah dilakukan secara otomatis dengan melakukan schedulling, setiap 6 jam sekali maka web service akan rutin mengambil data dari sumber. Selain menggunakan schedulling pengambilan data dapat dilakukan dengan cara mengklik button update data. Pada Halaman ini data yang sudah dikumpulkan akan disimpan kedalam spreadsheet. Pada halaman ini juga kita dapat melihat data yang sudah terkumpul pada spreadsheet. spreadsheet disini dijadikan sebagai wadah atau database untuk pemrosesan dan pemodelan agar dapat dilakukan secara realtime.
 ![Alt text](images/image.png)
